@@ -124,7 +124,7 @@ function Fastpip() {
                             </div>
                         </div>
                     </div>
-                    <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may slightly defer.</p></div>
+                    <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may slightly deviate.</p></div>
                 </Form>
             </div>
         </div>
