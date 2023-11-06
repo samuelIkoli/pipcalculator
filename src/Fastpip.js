@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-
 import { Button, Form } from 'react-bootstrap'
 
-function Pip() {
+
+function Fastpip() {
     const [from, setFrom] = useState('USD')
     const [pipValue, setPipValue] = useState(0)
     const [pip, setPip] = useState(1)
@@ -33,7 +32,7 @@ function Pip() {
         if (!from || !to || !pip || !lot) {
             return
         }
-        const rate = await twelve_demo(from, to)
+        const rate = await fast_demo(from, to)
 
         return rate
     }
@@ -44,20 +43,27 @@ function Pip() {
     //     const rate = response['Time Series FX (Weekly)'][0]
     //     console.log(rate)
     // }
-    const twelve_demo = async (from, to) => {
+    const fast_demo = async (from, to) => {
         let ex, res, response
-        const demo_key = '3086f380e87b4353a4fd98f1a2c71b42'
-        const url = `https://api.twelvedata.com/time_series?symbol=${from}/${to}&interval=1day&apikey=${demo_key}`
+        const demo_key = '80a351c049-1e689d49c2-s3p1qg'
+        const url = `https://api.fastforex.io/fetch-multi?from=${from}&to=${to}&api_key=80a351c049-1e689d49c2-s3p1qg`
         if (from === to) {
             ex = 1
         }
         else {
             res = await fetch(url)
             response = await res.json()
-            ex = response.values[0].close
+            ex = response.results[to]
+            // console.log(response.results[to])
         }
         setRate(ex)
-        setPipValue(ex * 10 * lot * pip)
+        if (from === 'JPY') {
+            setPipValue(ex * 1000 * lot * pip)
+        }
+        else {
+            setPipValue(ex * 10 * lot * pip)
+        }
+
     }
 
     // const alpha_key = `TAOECNDNINUR6ZG6`
@@ -125,6 +131,4 @@ function Pip() {
     )
 }
 
-export default Pip
-
-
+export default Fastpip
