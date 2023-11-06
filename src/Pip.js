@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap'
 
 function Pip() {
-    const [from, setFrom] = useState('CAD')
+    const [from, setFrom] = useState('USD')
     const [pipValue, setPipValue] = useState(0)
     const [pip, setPip] = useState(1)
     const [lot, setLot] = useState(1)
@@ -12,10 +12,10 @@ function Pip() {
     const [to, setTo] = useState('USD')
 
     const symbols = [
-        'USDCAD', 'EURJPY',
+        'GBPUSD', 'EURJPY',
         'EURUSD', 'EURCHF',
         'USDCHF', 'EURGBP',
-        'GBPUSD', 'AUDCAD',
+        'USDCAD', 'AUDCAD',
         'NZDUSD', 'GBPCHF',
         'AUDUSD', 'GBPJPY',
         'USDJPY', 'CHFJPY',
@@ -116,11 +116,17 @@ function Pip() {
                             })}
                         </Form.Select>
                     </Form.Group>
-                    <div className="d-flex justify-content-around">
-                        <Button variant="success" type="submit" onClick={get_rate}>
-                            Calculate
-                        </Button>
-                        <h2 className='text-success'>{pipValue ? pipValue.toFixed(2) : ''} {pipValue ? to : ''}</h2>
+                    <div className="container justify-content-around">
+                        <div className="row ">
+                            <div className="col justify-content-center d-flex align-items-center">
+                                <Button variant="success" type="submit" onClick={get_rate}>
+                                    Calculate
+                                </Button>
+                            </div>
+                            <div className="col justify-content-center d-flex align-items-center border rounded-2 border-secondary">
+                                <h2 className='text-success my-auto'>{pipValue ? pipValue.toFixed(2) : ''} {pipValue ? to : ''}</h2>
+                            </div>
+                        </div>
                     </div>
                     <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may slightly defer.</p></div>
                 </Form>
