@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App';
 import {
-  createBrowserRouter, createRoutesFromElements,
-  RouterProvider,
-  Route,
-  Link,
+  createBrowserRouter,
+  RouterProvider
 } from "react-router-dom";
 import Pip from './Pip';
 import Fastpip from './Fastpip';
+import ERPip from './ERpip';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "fastpip",
     element: <Fastpip />,
+  },
+  {
+    path: "erpip",
+    element: <ERPip />,
   },
 ]);
 

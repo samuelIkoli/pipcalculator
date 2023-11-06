@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-
 import { Button, Form } from 'react-bootstrap'
 
-function Pip() {
+function ERPip() {
     const [from, setFrom] = useState('USD')
     const [pipValue, setPipValue] = useState(0)
     const [pip, setPip] = useState(1)
@@ -32,7 +31,7 @@ function Pip() {
         if (!from || !to || !pip || !lot) {
             return
         }
-        const rate = await twelve_demo(from, to)
+        const rate = await ER_demo(from, to)
 
         return rate
     }
@@ -43,19 +42,24 @@ function Pip() {
     //     const rate = response['Time Series FX (Weekly)'][0]
     //     console.log(rate)
     // }
-    const twelve_demo = async (from, to) => {
+    const ER_demo = async (from, to) => {
         let ex, res, response
-        const demo_key = '3086f380e87b4353a4fd98f1a2c71b42'
-        const url = `https://api.twelvedata.com/time_series?symbol=${from}/${to}&interval=1day&apikey=${demo_key}`
+        const demo_key = '1cab8135968d36d7a256e583'
+        const url = `https://v6.exchangerate-api.com/v6/${demo_key}/pair/${from}/${to}`
         if (from === to) {
             ex = 1
         }
         else {
             res = await fetch(url)
             response = await res.json()
-            ex = response.values[0].close
+            ex = response.conversion_rate
         }
-        setPipValue(ex * 10 * lot * pip)
+        if (from === 'JPY') {
+            setPipValue(ex * 1000 * lot * pip)
+        }
+        else {
+            setPipValue(ex * 10 * lot * pip)
+        }
     }
 
     // const alpha_key = `TAOECNDNINUR6ZG6`
@@ -123,6 +127,6 @@ function Pip() {
     )
 }
 
-export default Pip
+export default ERPip
 
 

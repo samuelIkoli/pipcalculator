@@ -9,7 +9,6 @@ function Fastpip() {
     const [pipValue, setPipValue] = useState(0)
     const [pip, setPip] = useState(1)
     const [lot, setLot] = useState(1)
-    const [rate, setRate] = useState(0)
     const [to, setTo] = useState('USD')
 
 
@@ -46,7 +45,7 @@ function Fastpip() {
     const fast_demo = async (from, to) => {
         let ex, res, response
         const demo_key = '80a351c049-1e689d49c2-s3p1qg'
-        const url = `https://api.fastforex.io/fetch-multi?from=${from}&to=${to}&api_key=80a351c049-1e689d49c2-s3p1qg`
+        const url = `https://api.fastforex.io/fetch-multi?from=${from}&to=${to}&api_key=${demo_key}`
         if (from === to) {
             ex = 1
         }
@@ -56,7 +55,6 @@ function Fastpip() {
             ex = response.results[to]
             // console.log(response.results[to])
         }
-        setRate(ex)
         if (from === 'JPY') {
             setPipValue(ex * 1000 * lot * pip)
         }
@@ -124,7 +122,7 @@ function Fastpip() {
                             </div>
                         </div>
                     </div>
-                    <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may slightly deviate.</p></div>
+                    <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may deviate slightly.</p></div>
                 </Form>
             </div>
         </div>
