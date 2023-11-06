@@ -6,8 +6,8 @@ import { Button, Form } from 'react-bootstrap'
 function Pip() {
     const [from, setFrom] = useState('CAD')
     const [pipValue, setPipValue] = useState(0)
-    const [pip, setPip] = useState(0)
-    const [lot, setLot] = useState(0)
+    const [pip, setPip] = useState(1)
+    const [lot, setLot] = useState(1)
     const [rate, setRate] = useState(0)
     const [to, setTo] = useState('USD')
 
@@ -72,7 +72,7 @@ function Pip() {
     const alpha_key = `TAOECNDNINUR6ZG6`
     const alpha_url = `https://www.alphavantage.co/query?function=FX_WEEKLY&from_symbol=${from}&to_symbol=${to}&apikey=${alpha_key}`
     return (
-        <div className='mt-5 pt-5 container justify-content-center'>
+        <div className='py-5 container justify-content-center'>
             <div className="container justify-content-center gray border rounded-5 border-dark">
                 <Form className='p-5'>
                     <h1 className='mb-3'>Pip Calculator</h1>
@@ -92,14 +92,14 @@ function Pip() {
 
                     <Form.Group className="mb-4" controlId="">
                         <Form.Label>Pip amount</Form.Label>
-                        <Form.Control className='border rounded-2 border-secondary' type="number" placeholder="" onChange={(e) => {
+                        <Form.Control className='border rounded-2 border-secondary' type="number" min={1} placeholder="1" onChange={(e) => {
                             setPip(e.target.value)
                         }} />
                     </Form.Group>
 
                     <Form.Group className="mb-4" controlId="">
                         <Form.Label>Lot Size</Form.Label>
-                        <Form.Control className='border rounded-2 border-secondary' type="number" placeholder="" onChange={(e) => {
+                        <Form.Control className='border rounded-2 border-secondary' type="number" min={0.01} placeholder="1" onChange={(e) => {
                             setLot(e.target.value)
                         }} />
                     </Form.Group>
@@ -116,10 +116,12 @@ function Pip() {
                             })}
                         </Form.Select>
                     </Form.Group>
-                    <Button variant="success" type="submit" onClick={get_rate}>
-                        Calculate
-                    </Button>
-                    <div>{pipValue ? pipValue : ''} {pipValue ? to : ''}</div>
+                    <div className="d-flex justify-content-center">
+                        <Button variant="success" type="submit" onClick={get_rate}>
+                            Calculate
+                        </Button>
+                        <h2 className='text-success'>{pipValue ? pipValue.toFixed(2) : ''} {pipValue ? to : ''}</h2>
+                    </div>
                 </Form>
             </div>
         </div>

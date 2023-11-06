@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App container justify-content-center">
+    <div className="App  d-flex justify-content-center align-items-center">
       <Pip />
     </div>
   );
