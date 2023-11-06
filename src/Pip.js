@@ -116,12 +116,13 @@ function Pip() {
                             })}
                         </Form.Select>
                     </Form.Group>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-around">
                         <Button variant="success" type="submit" onClick={get_rate}>
                             Calculate
                         </Button>
                         <h2 className='text-success'>{pipValue ? pipValue.toFixed(2) : ''} {pipValue ? to : ''}</h2>
                     </div>
+                    <div className='mt-3'><p>Note that this is just an estimate to aid trading. Real values may slightly defer.</p></div>
                 </Form>
             </div>
         </div>
